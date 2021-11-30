@@ -35,6 +35,7 @@ sites
 *.i*86
 *.x86_64
 *.hex
+amar-cat
 
 # Debug files
 *.dSYM/
