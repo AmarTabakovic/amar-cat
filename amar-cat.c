@@ -15,6 +15,7 @@ void read_contents(char *file_name)
 		{
 			break;
 		}
+
 		printf("%c", character);
 	}
 
@@ -23,7 +24,6 @@ void read_contents(char *file_name)
 
 int check_file_exists(char* file_name)
 {
-
 	FILE *file_pointer;
 	char character;
 
@@ -51,11 +51,9 @@ int main(int argc, char **argv)
 	
 	for(int i = 1; i < argc; i++)
 	{
-		file_ok = check_file_exists(argv[i]);
-
-		if(file_ok == -1)
-		 {
-			break;
+		if(file_ok != -1)
+		{
+			file_ok = check_file_exists(argv[i]);
 		}
 	}
 	
