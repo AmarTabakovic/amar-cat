@@ -36,8 +36,7 @@ void read_contents(char *file_name)
 int check_file_exists(char* file_name)
 {
 	FILE *file_pointer;
-	char character;
-
+	
 	file_pointer = fopen(file_name, "r");
 
 	if(file_pointer == NULL)
