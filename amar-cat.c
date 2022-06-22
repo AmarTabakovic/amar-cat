@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 /**
- * @brief Reads and prints the content of a file with a given file name.
+ * @brief Reads and prints the content of an existing file with a given file name.
  * 
  * @param file_name file name
  */
@@ -12,18 +12,12 @@ void read_contents(char *file_name)
 
 	file_pointer = fopen(file_name, "r");
 
-	while(1)
+	while((character = fgetc(file_pointer)) != EOF)
 	{
-		character = fgetc(file_pointer);
-
-		if(character == EOF)
-		{
-			printf("\n");
-			break;
-		}
-
 		printf("%c", character);
 	}
+
+	printf("\n");
 
 	fclose(file_pointer);
 }
@@ -38,12 +32,8 @@ int check_file_exists(char* file_name)
 {
 	FILE *file_pointer;
 	
-	file_pointer = fopen(file_name, "r");
-
-	if(file_pointer == NULL)
+	if((file_pointer = fopen(file_name, "r")) == NULL)
 	{
-		fclose(file_pointer);
-		fprintf(stderr, "amar-cat: No such file: %s\n", file_name);
 		return -1;
 	}
 
@@ -70,11 +60,11 @@ int main(int argc, char **argv)
 	
 	for(int i = 1; i < argc; i++)
 	{
-		if(file_ok == -1)
+		if(check_file_exists(argv[i]) != 0)
 		{
-			break;
+			file_ok = -1;
+			fprintf(stderr, "amar-cat: No such file: %s\n", argv[i]);
 		}
-		file_ok = check_file_exists(argv[i]);
 	}
 	
 	if(file_ok == 0) 
