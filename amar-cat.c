@@ -18,6 +18,7 @@ void read_contents(char *file_name)
 
 		if(character == EOF)
 		{
+			printf("\n");
 			break;
 		}
 
@@ -41,10 +42,11 @@ int check_file_exists(char* file_name)
 
 	if(file_pointer == NULL)
 	{
+		fclose(file_pointer);
 		fprintf(stderr, "amar-cat: No such file: %s\n", file_name);
 		return -1;
 	}
-	
+
 	fclose(file_pointer);
 
 	return 0;
@@ -68,10 +70,11 @@ int main(int argc, char **argv)
 	
 	for(int i = 1; i < argc; i++)
 	{
-		if(file_ok != -1)
+		if(file_ok == -1)
 		{
-			file_ok = check_file_exists(argv[i]);
+			break;
 		}
+		file_ok = check_file_exists(argv[i]);
 	}
 	
 	if(file_ok == 0) 
